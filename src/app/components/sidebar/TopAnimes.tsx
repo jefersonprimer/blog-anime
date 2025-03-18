@@ -47,7 +47,7 @@ const TopAnimes = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="w-[400px] text-black bg-gray-100 p-4 border border-gray-300">
+    <div className="w-[374px] text-black bg-gray-100 p-4 border border-gray-300">
       <h1>Artigos</h1>
       <h2 className="text-xl font-bold mb-4">Top 10 Animes</h2>
       <ul>

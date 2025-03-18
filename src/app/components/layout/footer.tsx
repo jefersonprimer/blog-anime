@@ -4,13 +4,13 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="w-[1200px] mx-auto px-4 bg-[#FFFCF6]">
         <div className="container mx-auto px-4 py-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Navegação */}
             <div>
-                <h4 className="text-lg font-semibold mb-4">Navegação</h4>
-                <ul className="space-y-2">
+                <h4 className="text-lg font-semibold mb-4 text-[#000028] border-t-2 border-[#DADADA]">Navegação</h4>
+                <ul className="space-y-2 text-[#4A4E58]">
                 <li><a href="https://www.crunchyroll.com/pt-br/videos/popular" className="hover:text-orange-500">Séries Populares</a></li>
                 <li><a href="https://www.crunchyroll.com/pt-br/simulcasts" className="hover:text-orange-500">Séries em Simulcast</a></li>
                 <li><a href="https://www.crunchyroll.com/pt-br/simulcastcalendar" className="hover:text-orange-500">Calendário de Lançamentos</a></li>
@@ -22,8 +22,8 @@ const Footer = () => {
 
             {/* Contate-nos */}
             <div>
-                <h4 className="text-lg font-semibold mb-4">Contate-nos</h4>
-                <ul className="space-y-2">
+                <h4 className="text-lg font-semibold mb-4 text-[#000028] border-t-2 border-[#DADADA]">Contate-nos</h4>
+                <ul className="space-y-2 text-[#4A4E58]">
                 <li>
                     <a href="https://www.youtube.com/c/CrunchyrollBR" target="_blank" className="flex items-center hover:text-orange-500">
                     <svg className="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-labelledby="youtube-svg" role="img">
@@ -76,10 +76,10 @@ const Footer = () => {
 
             {/* Crunchyroll */}
             <div>
-                <h4 className="text-lg font-semibold mb-4">Crunchyroll</h4>
-                <ul className="space-y-2">
+                <h4 className="text-lg font-semibold mb-4 text-[#000028] border-t-2 border-[#DADADA]">Crunchyroll</h4>
+                <ul className="space-y-2 text-[#4A4E58]">
                 <li>
-                    <a href="https://www.crunchyroll.com/pt-br/premium?referrer=newweb_organic_footer_news&return_url=https%3A%2F%2Fwww.crunchyroll.com%2Fpt-br%2Fnews%3Fsrsltid%3DAfmBOoqMk22pd8F4V5UHEkB9feOxBsrINMqZK6wMDqHw4VwDFIKdYqaj#plans" className="flex items-center text-orange-500 hover:text-orange-400">
+                    <a href="https://www.crunchyroll.com/pt-br/premium?referrer=newweb_organic_footer_news&return_url=https%3A%2F%2Fwww.crunchyroll.com%2Fpt-br%2Fnews%3Fsrsltid%3DAfmBOoqMk22pd8F4V5UHEkB9feOxBsrINMqZK6wMDqHw4VwDFIKdYqaj#plans" className="flex items-center text-[#FAB818] hover:text-orange-400">
                     <svg className="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-labelledby="premium-filled-svg" role="img">
                         <title id="premium-filled-svg">Premium</title>
                         <path fill="currentColor" d="M2.419 13L0 4.797 4.837 6.94 8 2l3.163 4.94L16 4.798 13.581 13z"></path>
@@ -91,7 +91,7 @@ const Footer = () => {
                 <li><a href="https://help.crunchyroll.com/hc/pt" target="_blank" className="hover:text-orange-500">Centro de Ajuda</a></li>
                 <li><a href="https://www.crunchyroll.com/pt-br/tos" target="_blank" className="hover:text-orange-500">Termos de Uso</a></li>
                 <li><a href="https://www.crunchyroll.com/privacy/index.html" target="_blank" className="hover:text-orange-500">Política de Privacidade</a></li>
-                <li><button className="text-white hover:text-orange-500">Ferramenta de Consentimento de Cookies</button></li>
+                <li><a href="mailto:pr@crunchyroll.com" target="_blank" className="hover:text-orange-500">Ferramenta de Consentimento de Cookies</a></li>
                 <li><a href="mailto:pr@crunchyroll.com" target="_blank" className="hover:text-orange-500">Solicitações de Imprensa</a></li>
                 <li><a href="https://www.crunchyroll.com/pt-br/devices" target="_blank" className="hover:text-orange-500">Baixe o App</a></li>
                 <li><a href="https://www.crunchyroll.com/pt-br/redeem" target="_blank" className="hover:text-orange-500">Resgatar Código</a></li>
@@ -101,8 +101,8 @@ const Footer = () => {
 
             {/* Conta */}
             <div>
-                <h4 className="text-lg font-semibold mb-4">Conta</h4>
-                <ul className="space-y-2">
+                <h4 className="text-lg font-semibold mb-4 text-[#000028] border-t-2 border-[#DADADA]">Conta</h4>
+                <ul className="space-y-2 text-[#4A4E58]">
                 <li><a href="https://sso.crunchyroll.com/authorize?client_id=opy75pstrnzw4edkr9ed&redirect_uri=https%3A%2F%2Fwww.crunchyroll.com%2Fcallback&response_type=cookie&state=%2Faccount%2Fpreferences&prompt=register" className="hover:text-orange-500">Criar Conta</a></li>
                 <li><a href="https://sso.crunchyroll.com/authorize?client_id=opy75pstrnzw4edkr9ed&redirect_uri=https%3A%2F%2Fwww.crunchyroll.com%2Fcallback&response_type=cookie&state=%2Fpt-br%2Fnews%3Fsrsltid%3DAfmBOoqMk22pd8F4V5UHEkB9feOxBsrINMqZK6wMDqHw4VwDFIKdYqaj" className="hover:text-orange-500">Login</a></li>
                 </ul>
@@ -111,10 +111,10 @@ const Footer = () => {
         </div>
         
         {/* Copyright section */}
-        <div className="container mx-auto px-4 py-6 border-t border-gray-800 mt-8">
+        <div className="container mx-auto px-4 py-6 border-t border-gray-800 mt-8 text-[#4A4E58]">
             <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center mb-4 md:mb-0">
-                <img className="h-8 mr-4" src="/news/img/footer/sony_pictures_logo_dark.png" alt="Sony Pictures Logo" />
+                <img className="h-8 mr-4" src="https://www.crunchyroll.com/news/img/footer/sony_pictures_logo_dark.png" alt="Sony Pictures Logo" />
                 <p className="text-sm">© Crunchyroll, LLC</p>
             </div>
             <div className="relative">

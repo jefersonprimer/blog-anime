@@ -19,7 +19,7 @@ const HomePage = () => {
   }
 
   return (
-    <div className="max-w-screen-xl mx-auto px-4"> {/* Garantindo que o conteúdo esteja centralizado com margens laterais iguais */}
+    <div className="w-[1200px] mx-auto px-4"> {/* Garantindo que o conteúdo esteja centralizado com margens laterais iguais */}
       {/* <h1 className="text-3xl font-semibold mb-6 text-center">Posts Recentes</h1> */}
    
 

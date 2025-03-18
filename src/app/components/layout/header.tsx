@@ -121,7 +121,8 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-[#FFFCF6] text-[#4A4E58]">
+    <header className="bg-[#FFFCF6] text-[#4A4E58] border-b-4 border-orange-500">
+  
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-center h-16">
           {/* Logo */}

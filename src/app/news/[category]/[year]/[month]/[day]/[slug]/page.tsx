@@ -95,33 +95,60 @@ export default function PostDetailPage() {
   }
 
   return (
-    <div className="container mx-auto p-4 max-w-4xl">
-      {/* Título e Data */}
-      <h1 className="text-3xl font-bold mb-2">{post.title}</h1>
-      <p className="text-gray-500 mb-4">
-        {new Date(post.date).toLocaleDateString('pt-BR', {
-          day: 'numeric',
-          month: 'long',
-          year: 'numeric'
-        })}
-      </p>
-      
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2 mb-6">
-        {post.tags.map((tag, index) => (
-          <span
-            key={index}
-            className="bg-[#F0EDE7] border border-[#F0EDE7] text-[#298382] text-xs font-semibold px-2 py-1 rounded-[10px]"
-          >
-            {tag}
-          </span>
-        ))}
+    <div className="container mx-auto p-4 w-[1200px]">
+
+      <div className='flex items-center gap-4 mt-8'>
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {post.tags.map((tag, index) => (
+            <span
+              key={index}
+              className="bg-[#F0EDE7] border border-[#F0EDE7] text-[#298382] text-xs font-semibold px-2 py-1 rounded-[10px]"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Date */}
+        <p className="text-[#4A4E58] mb-4 text-sm">
+          {new Date(post.date).toLocaleDateString('pt-BR', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+          })}
+        </p>
       </div>
-      
+
+      {/* Título e Summary */}
+      <h1 className="text-3xl font-bold mb-2 text-[#000000]">{post.title}</h1>
+      <h3 className="text-xl mb-2 text-[#000000]">{post.summary}</h3>
+
+      {/* Author and Image */}
+      <div className="border-b border-[#00787E] mt-6 pb-4 flex items-center gap-4">
+        <img className='w-[50px] h-[50px] rounded-[50%]' src="https://a.storyblok.com/f/178900/871x707/14240ab4f1/jose-sassi-avatar.jpg/m/filters:quality(95)format(webp)" alt="" />
+        <p className="text-sm">
+          <span className="font-medium text-[#00787E]">{post.author}</span>
+          {/* <span className="text-gray-600"> Categoria:</span> <span className="font-medium">{post.category}</span> */}
+        </p>
+      </div>
+
       {/* Conteúdo */}
-      <div className="prose max-w-none mb-8">
+      <div className="prose max-w-none mb-8 text-[#000000] border-b border-[#00787E]">
         <p>{post.content}</p>
-      </div>
+
+         {/* Tags */}
+         <div className="flex flex-wrap gap-2 mb-4 mt-[60px]">
+          {post.tags.map((tag, index) => (
+            <span
+              key={index}
+              className="bg-[#F0EDE7] border border-[#F0EDE7] text-[#298382] text-xs font-semibold px-2 py-1 rounded-[10px]"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>      
       
       {/* Imagens */}
       {post.images && post.images.length > 0 && (
@@ -154,14 +181,7 @@ export default function PostDetailPage() {
           ))}
         </div>
       )}
-      
-      {/* Autor e Categoria */}
-      <div className="border-t border-gray-200 pt-4 mt-6">
-        <p className="text-sm">
-          <span className="text-gray-600">Autor:</span> <span className="font-medium text-[#00787E]">{post.author}</span> | 
-          <span className="text-gray-600"> Categoria:</span> <span className="font-medium">{post.category}</span>
-        </p>
-      </div>
+           
     </div>
   );
 }

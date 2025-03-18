@@ -19,10 +19,8 @@ const HomePage = () => {
   }
 
   return (
-    <div className="w-[1200px] mx-auto px-4"> {/* Garantindo que o conteúdo esteja centralizado com margens laterais iguais */}
-      {/* <h1 className="text-3xl font-semibold mb-6 text-center">Posts Recentes</h1> */}
-   
-
+    <div className="w-[1200px] mx-auto px-4">
+      
       <Banner
         src="https://a.storyblok.com/f/178900/2304x154/02c4ee539d/pt_sololevelings2_cr_desktop_2304x154.png/m/filters:quality(95)format(webp)"
         alt="Solo Leveling"

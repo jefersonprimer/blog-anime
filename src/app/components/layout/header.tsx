@@ -143,14 +143,14 @@ const Header = () => {
               >
                 <Link 
                   href={item.href} 
-                  className="px-3 py-2 hover:text-indigo-200 transition-colors"
+                  className="px-3 py-2 hover:text-[#008382] transition-colors hover:bg-[#E6E5E3] px-4 py-6"
                 >
                   {item.label}
                 </Link>
                 
                 {/* Dropdown Modal */}
                 {openDropdown === item.label && (
-                  <div className="absolute z-10 bg-[#FFFCF6] w-48  shadow-lg pt-5 mt-1 left-0">
+                  <div className="absolute z-10 bg-[#E6E5E3] w-48  shadow-lg pt-5 mt-5 left-0">
                     {item.subLinks.map((subLink) => (
                       <Link 
                         key={subLink.label} 

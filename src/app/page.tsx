@@ -3,8 +3,8 @@
 'use client';
 
 import useFetchPosts from './hooks/useFetchPosts';
-import PostGrid from './components/PostGrid';
-import Sidebar from './components/Sidebar';
+import PostGrid from './components/post/PostGrid';
+import Sidebar from './components/sidebar/Sidebar';
 
 const HomePage = () => {
   const { posts, loading, error } = useFetchPosts();

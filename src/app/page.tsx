@@ -5,6 +5,7 @@
 import useFetchPosts from './hooks/useFetchPosts';
 import PostGrid from './components/post/PostGrid';
 import Sidebar from './components/sidebar/Sidebar';
+import Banner from './components/Banner';
 
 const HomePage = () => {
   const { posts, loading, error } = useFetchPosts();
@@ -20,6 +21,14 @@ const HomePage = () => {
   return (
     <div className="max-w-screen-xl mx-auto px-4"> {/* Garantindo que o conteúdo esteja centralizado com margens laterais iguais */}
       {/* <h1 className="text-3xl font-semibold mb-6 text-center">Posts Recentes</h1> */}
+   
+
+      <Banner
+        src="https://a.storyblok.com/f/178900/2304x154/02c4ee539d/pt_sololevelings2_cr_desktop_2304x154.png/m/filters:quality(95)format(webp)"
+        alt="Solo Leveling"
+        width={2304}
+        height={154}
+      />
 
       {/* Ajuste da grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -33,6 +42,8 @@ const HomePage = () => {
           <Sidebar />
         </div>
       </div>
+      
+    
     </div>
   );
 };

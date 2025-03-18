@@ -17,7 +17,7 @@ const MainHeader = () => {
   };
 
   return (
-    <header className="bg-gradient-to-r from-[#FFFCF6] via-[#DDDDDC] to-[#D7D7D7] shadow-md">
+    <header className="bg-gradient-to-r from-[#FFFCF6] via-[#DDDDDC] to-[#D7D7D7]">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-10 px-[120px]">
           {/* Logo */}

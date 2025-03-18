@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
+
 // Define the structure for navigation items
 type SubLink = {
   label: string;
@@ -77,8 +78,12 @@ const Header = () => {
       label: "Mais",
       href: "/contato",
       subLinks: [
-        { label: "Fale Conosco", href: "/contato/fale-conosco" },
-        { label: "Sobre Nós", href: "/contato/sobre" }
+        { label: "Videogames", href: "/contato/fale-conosco" },
+        { label: "Produtos", href: "/contato/sobre" },
+        { label: "Mangás", href: "/contato/sobre" },
+        { label: "Filmes", href: "/contato/sobre" },
+        { label: "Anime Award", href: "/contato/sobre" },
+        { label: "Música", href: "/contato/sobre" }
       ]
     },
     {
@@ -116,13 +121,13 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-indigo-900 text-white shadow-md">
+    <header className="bg-[#FFFCF6] text-[#4A4E58]">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="text-xl font-bold">
-              AnimesBlog
+              <img src="https://a.storyblok.com/f/178900/240x68/6b8290613c/cr_news_logo_orange-white_160x45.png/m/filters:quality(95)format(webp)" alt="" />
             </Link>
           </div>
           
@@ -144,7 +149,7 @@ const Header = () => {
                 
                 {/* Dropdown Modal */}
                 {openDropdown === item.label && (
-                  <div className="absolute z-10 bg-indigo-800 w-48 rounded-md shadow-lg py-1 mt-1 left-0">
+                  <div className="absolute z-10 bg-[#FFFCF6] w-48  shadow-lg pt-5 mt-1 left-0">
                     {item.subLinks.map((subLink) => (
                       <Link 
                         key={subLink.label} 
@@ -161,7 +166,7 @@ const Header = () => {
             <button 
                 className="navbar_searchButton__vUVYg ">
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.20078 0.799988C13.84 0.799988 17.6008 4.5608 17.6008 9.19999C17.6008 11.1954 16.905 13.0283 15.7429 14.4693L21.2372 19.9636L19.9644 21.2364L14.4701 15.7421C13.0291 16.9042 11.1962 17.6 9.20078 17.6C4.56159 17.6 0.800781 13.8392 0.800781 9.19999C0.800781 4.5608 4.56159 0.799988 9.20078 0.799988ZM9.20078 2.59999C5.5557 2.59999 2.60078 5.55491 2.60078 9.19999C2.60078 12.8451 5.5557 15.8 9.20078 15.8C12.8459 15.8 15.8008 12.8451 15.8008 9.19999C15.8008 5.55491 12.8459 2.59999 9.20078 2.59999Z" fill="white"></path>
+                <path fillRule="evenodd" clipRule="evenodd" d="M9.20078 0.799988C13.84 0.799988 17.6008 4.5608 17.6008 9.19999C17.6008 11.1954 16.905 13.0283 15.7429 14.4693L21.2372 19.9636L19.9644 21.2364L14.4701 15.7421C13.0291 16.9042 11.1962 17.6 9.20078 17.6C4.56159 17.6 0.800781 13.8392 0.800781 9.19999C0.800781 4.5608 4.56159 0.799988 9.20078 0.799988ZM9.20078 2.59999C5.5557 2.59999 2.60078 5.55491 2.60078 9.19999C2.60078 12.8451 5.5557 15.8 9.20078 15.8C12.8459 15.8 15.8008 12.8451 15.8008 9.19999C15.8008 5.55491 12.8459 2.59999 9.20078 2.59999Z" fill="#4A4E58"></path>
                 </svg>
             </button>
           </nav>

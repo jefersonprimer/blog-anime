@@ -47,7 +47,8 @@ const TopAnimes = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="w-[300px] bg-gray-100 p-4 border border-gray-300 rounded-lg">
+    <div className="w-[400px] text-black bg-gray-100 p-4 border border-gray-300">
+      <h1>Artigos</h1>
       <h2 className="text-xl font-bold mb-4">Top 10 Animes</h2>
       <ul>
         {animes.map((anime, index) => (
@@ -55,7 +56,7 @@ const TopAnimes = () => {
             <img src={anime.image_url} alt={anime.title} className="w-20 h-28 object-cover rounded-lg" />
             <div className="ml-4">
               <h3 className="text-lg font-semibold">{anime.title}</h3>
-              <p className="text-sm text-gray-500">{anime.type} | {anime.episodes} eps</p>
+              <p className="text-sm text-black">{anime.type} | {anime.episodes} eps</p>
               <p className="text-sm text-yellow-500">Score: {anime.score}</p>
               <p className="text-sm text-gray-500">Members: {anime.members.toLocaleString()}</p>
             </div>

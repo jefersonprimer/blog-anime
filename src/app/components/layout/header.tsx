@@ -124,7 +124,7 @@ const Header = () => {
     <header className="bg-[#FFFCF6] text-[#4A4E58] border-b-4 border-orange-500">
   
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-center h-16">
+        <div className="flex items-center justify-center h-16  px-[80px]">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="text-xl font-bold">
@@ -133,7 +133,7 @@ const Header = () => {
           </div>
           
           {/* Navigation for desktop */}
-          <nav className="hidden md:flex space-x-4">
+          <nav className="hidden md:flex space-x-2">
             {navItems.map((item) => (
               <div 
                 key={item.label} 
@@ -164,12 +164,11 @@ const Header = () => {
                 )}
               </div>
             ))}
-            <button 
-                className="navbar_searchButton__vUVYg ">
+            <Link href='/search' className="cursor-pointer">
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" clipRule="evenodd" d="M9.20078 0.799988C13.84 0.799988 17.6008 4.5608 17.6008 9.19999C17.6008 11.1954 16.905 13.0283 15.7429 14.4693L21.2372 19.9636L19.9644 21.2364L14.4701 15.7421C13.0291 16.9042 11.1962 17.6 9.20078 17.6C4.56159 17.6 0.800781 13.8392 0.800781 9.19999C0.800781 4.5608 4.56159 0.799988 9.20078 0.799988ZM9.20078 2.59999C5.5557 2.59999 2.60078 5.55491 2.60078 9.19999C2.60078 12.8451 5.5557 15.8 9.20078 15.8C12.8459 15.8 15.8008 12.8451 15.8008 9.19999C15.8008 5.55491 12.8459 2.59999 9.20078 2.59999Z" fill="#4A4E58"></path>
                 </svg>
-            </button>
+            </Link>
           </nav>
           
           {/* Mobile menu button */}

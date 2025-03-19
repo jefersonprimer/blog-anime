@@ -36,11 +36,11 @@ const ArticlesCarousel: React.FC<DestaqueCarouselProps> = ({ posts }) => {
       <h1 className='text-3xl text-black border-b-4 border-[#F47521]  my-4'>Destaque</h1>
       <div className="relative bg-[#F0EDE7]  p-4 flex justify-center items-center">
         <button onClick={prevSlide} className="absolute left-4 text-gray-700 text-2xl">
-        <svg width="13" height="21" viewBox="0 0 13 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.0607 0L12.182 2.12132L4.24232 10.0607L12.182 18L10.0607 20.1213L0 10.0607L10.0607 0Z" fill="white"></path></svg>
+        <svg width="13" height="21" viewBox="0 0 13 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clip-rule="evenodd" d="M10.0607 0L12.182 2.12132L4.24232 10.0607L12.182 18L10.0607 20.1213L0 10.0607L10.0607 0Z" fill="white"></path></svg>
         </button>
         <PostCard key={displayedPosts[currentIndex].id} post={displayedPosts[currentIndex]} />
         <button onClick={nextSlide} className="absolute right-4 text-gray-700 text-2xl">
-        <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.04481 10L-8.61508e-07 8.94573L3.91053 5L-1.71613e-07 1.05427L1.04482 5.20478e-07L6 5L1.04481 10Z" fill="#FFFFFF"></path></svg>
+        <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clip-rule="evenodd" d="M1.04481 10L-8.61508e-07 8.94573L3.91053 5L-1.71613e-07 1.05427L1.04482 5.20478e-07L6 5L1.04481 10Z" fill="#FFFFFF"></path></svg>
         </button>
       </div>
       {articlesPosts.length > 5 && (

@@ -1,33 +1,34 @@
 // components/post/NewsGrid.tsx
 
-import PostCard from './PostCard';
+
 import { Post } from '@/types/posts';
 import Link from 'next/link';
+import PostCardRows from './PostCardRows';
 
-type NewsGridProps = {
+type DestaquesGridProps = {
   posts: Post[];
 };
 
-const NewsGrid: React.FC<NewsGridProps> = ({ posts }) => {
+const DestaquesGrid: React.FC<DestaquesGridProps> = ({ posts }) => {
   // Filtrar apenas os posts da categoria "Noticias"
-  const newsPosts = posts.filter((post) => post.category === 'noticias');
+  const DestaquesGrid = posts.filter((post) => post.category === 'destaques');
 
-  if (newsPosts.length === 0) {
+  if (DestaquesGrid.length === 0) {
     return <p className="text-center text-gray-500">Nenhuma notícia encontrada.</p>;
   }
 
   // Mostrar apenas os 5 primeiros posts
-  const displayedPosts = newsPosts.slice(0, 5);
+  const displayedPosts = DestaquesGrid.slice(0, 5);
 
   return (
     <div>
-      <h1 className='text-3xl text-black border-b-4 border-[#F47521] mr-2 my-4'>Últimas notícias</h1>
-      <div className="flex flex-col bg-[#F0EDE7] mr-2">
+      <h1 className='text-3xl text-black border-b-4 border-[#F47521] my-4'>Destaques</h1>
+      <div className="flex flex-col bg-[#FFFCF6] ">
         {displayedPosts.map((post) => (
-          <PostCard key={post.id} post={post} />
+          <PostCardRows key={post.id} post={post} />
         ))}
         {/* Se houver mais de 5 notícias, mostrar o botão "Ver mais" */}
-        {newsPosts.length > 5 && (
+        {DestaquesGrid.length > 5 && (
           <div className="text-center mt-4">
             <Link
               href="/news/latest"
@@ -42,4 +43,4 @@ const NewsGrid: React.FC<NewsGridProps> = ({ posts }) => {
   );
 };
 
-export default NewsGrid;
+export default DestaquesGrid;

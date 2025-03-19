@@ -4,7 +4,7 @@ import TopAnimes from './TopAnimes';
 
 const Sidebar = () => {
   return (
-    <div className="w-full lg:w-[374px] bg-white border border-gray-300 ">
+    <div className="grid grid-cols-1 bg-white border border-gray-300 ">
       <TopAnimes />
     </div>
   );

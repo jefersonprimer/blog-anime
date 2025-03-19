@@ -27,12 +27,12 @@ const getPostUrl = (post: Post) => {
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
   return (
-    <div className="border border-gray-300 p-4 mb-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+    <div className="border-b border-[#29B9B7] px-3 py-4">
       <Link href={getPostUrl(post)} className="block">
         <img
           src="https://www.intoxianime.com/wp-content/uploads/2024/11/81sWQXTqCxL-tile-520x246.jpg"
           alt={post.title}
-          className="w-full h-auto rounded-md mb-4"
+          className="w-full h-auto mb-4"
         />
         
         <div>

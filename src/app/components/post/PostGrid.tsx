@@ -9,7 +9,7 @@ type PostGridProps = {
 
 const PostGrid: React.FC<PostGridProps> = ({ posts }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1  ">
       {posts.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}

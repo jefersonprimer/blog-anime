@@ -11,6 +11,8 @@ import DestaqueCarousel from './components/post/DestaqueCarousel';
 import Destaques from './components/post/Destaques';
 import AdBanner from './components/post/AdBanner';
 import AnimeSeriesCard from './components/AnimeSeriesCard';
+import QuizzesAndTests from './components/post/QuizzesAndTests';
+import Guides from './components/post/Guides';
 
 
 const HomePage = () => {
@@ -67,10 +69,11 @@ const HomePage = () => {
         <AdBanner />
       </div>
       <AnimeSeriesCard />
-      <AdBanner />
+      <QuizzesAndTests />
+      
       <AnimeSeriesCard />
-      <AdBanner />
-
+     
+      <Guides />
       {/* Botão Voltar ao Topo */}
       {showButton && (
         <button

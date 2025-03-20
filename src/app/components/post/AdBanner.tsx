@@ -1,45 +1,65 @@
-'use client';
+"use client";
 
 import useFetchPosts from "@/app/hooks/useFetchPosts";
-import ArticlesGrid from "./ArticlesGrid";
 import Destaques from "./Destaques";
-import NewsGrid from "./NewsGrid";
+import FilteredPostGrid from "../cards/FilteredPostGrid";
+import ArticlesGrid from "./ArticlesGrid";
+import Link from "next/link";
+import FilteredPostGridRow from "../cards/FilteredPostGrid";
 
-    
 const AdBanner = () => {
-const { posts, loading, error } = useFetchPosts();
+  const { posts, loading, error } = useFetchPosts();
 
-if (loading) {
+  if (loading) {
     return <p className="text-center text-lg">Carregando posts...</p>;
-}
+  }
 
-if (error) {
+  if (error) {
     return <p className="text-center text-lg text-red-500">{error}</p>;
-}
+  }
+
+  // Filtra apenas posts da categoria "anuncio"
+  const anuncios = posts.filter((post) => post.category === "anuncios");
+
   return (
     <div className="relative w-full max-w-[1200px] mx-auto mt-[30px]">
-        <div className="w-full max-w-[1200px] flex justify-between items-center">
-            <h1 className="text-3xl text-black border-b-4 border-[#F47521]  my-4">Anúncios</h1>
-            <div className="text-[#008382] border-1 border-[#008382] px-4 py-2">
-                Todos os anúncios
-            </div>
+      <div className="w-full max-w-[1200px] border-b-4 border-[#F47521] flex justify-between items-center">
+        <h1 className="text-3xl text-black my-4">Anúncios</h1>
+        <div className="text-[#008382] border border-[#008382] px-4 py-2">
+          <Link href="/news/announcements">Todos os anúncios</Link>
         </div>
+      </div>
 
-      {/* Ajuste da grid */}
+      {/* Grid com os três componentes, cada um recebendo uma parte dos anúncios */}
       <div className="grid grid-cols-12 mb-8">
-        {/* Sidebar (50% da largura) */}
+        {/* Destaques (Primeiros 2 anúncios) */}
         <div className="col-span-5">
-         <Destaques posts={posts} />
+          <FilteredPostGridRow
+            posts={anuncios} 
+           
+            category="anuncios" 
+            limit={1} 
+          />
         </div>
+    
 
-        {/* Primeiro Grid de Posts (25% da largura) */}
+        {/* Grid de anúncios (Próximos 2 anúncios) */}
         <div className="col-span-3">
-          <NewsGrid posts={posts} />
+          <FilteredPostGrid 
+            posts={anuncios} 
+           
+            category="anuncios" 
+            limit={1} 
+          />
         </div>
 
-        {/* Segundo Grid de Posts (25% da largura) */}
+        {/* Segundo Grid de anúncios (Últimos 2 anúncios) */}
         <div className="col-span-4">
-          <ArticlesGrid posts={posts} />
+        <FilteredPostGrid 
+            posts={anuncios}    
+            category="anuncios" 
+            limit={2} 
+          />
         </div>
       </div>
     </div>

@@ -35,14 +35,14 @@ Siga as etapas abaixo para clonar e executar o projeto em sua máquina local:
 2.  Execute o seguinte comando para clonar o repositório:
 
     ```bash
-    git clone <URL_DO_SEU_REPOSITORIO>
+    git clone https://github.com/jefersonprimer/blog-anime
     ```
 
     Substitua `<URL_DO_SEU_REPOSITORIO>` pela URL real do seu repositório no GitHub, GitLab, etc.
 3. Entre na pasta que foi criada
 
     ```bash
-    cd <nome-da-pasta>
+    cd blog-anime
     ```
 
 ### Executando o Projeto

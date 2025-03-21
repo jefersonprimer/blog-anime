@@ -4,18 +4,23 @@ import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Post } from '@/types/posts';
+import Link from 'next/link';
+import PostCardRows from '../../../../../../components/post/PostCardRows'; // Importando o componente de card
+import { useTheme } from "@/app/context/ThemeContext"; // Importando o hook useTheme
 
 export default function PostDetailPage() {
   const params = useParams();
   const [post, setPost] = useState<Post | null>(null);
+  const [recommendedPosts, setRecommendedPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const { isDark } = useTheme(); // Pegando o estado do tema
 
   // Captura os parâmetros da URL
   const { category, year, month, day, slug } = params;
 
   useEffect(() => {
-    async function fetchPost() {
+    async function fetchPostAndRecommendations() {
       try {
         setLoading(true);
         console.log("Fetching with params:", { category, year, month, day, slug });
@@ -36,11 +41,6 @@ export default function PostDetailPage() {
           const monthMatch = postMonth === month;
           const dayMatch = postDay === day;
           const slugMatch = p.slug === slug;
-          
-          console.log(`Post ${p.id} matches:`, {
-            categoryMatch, yearMatch, monthMatch, dayMatch, slugMatch,
-            fullMatch: categoryMatch && yearMatch && monthMatch && dayMatch && slugMatch
-          });
           
           return categoryMatch && yearMatch && monthMatch && dayMatch && slugMatch;
         });
@@ -63,6 +63,16 @@ export default function PostDetailPage() {
         if (foundPost) {
           console.log("Found post:", foundPost);
           setPost(foundPost);
+          
+          // Encontrar posts recomendados baseados na categoria
+          const recommendations = allPosts
+            .filter((p: Post) => 
+              p.category.toLowerCase() === foundPost.category.toLowerCase() && 
+              p.id !== foundPost.id
+            )
+            .slice(0, 3); // Limitar a 3 recomendações
+            
+          setRecommendedPosts(recommendations);
         } else {
           setError('Post não encontrado com os parâmetros fornecidos.');
         }
@@ -75,7 +85,7 @@ export default function PostDetailPage() {
     }
 
     if (slug) {
-      fetchPost();
+      fetchPostAndRecommendations();
     } else {
       setError('Slug não fornecido na URL.');
       setLoading(false);
@@ -83,105 +93,136 @@ export default function PostDetailPage() {
   }, [category, year, month, day, slug]);
 
   if (loading) {
-    return <div className="container mx-auto p-4">Carregando...</div>;
+    return <div className={`container mx-auto p-4 ${isDark ? "bg-[#333333] text-white" : "bg-white text-black"}`}>Carregando...</div>;
   }
 
   if (error) {
-    return <div className="container mx-auto p-4 text-red-500">{error}</div>;
+    return <div className={`container mx-auto p-4 text-red-500 ${isDark ? "bg-[#333333]" : "bg-white"}`}>{error}</div>;
   }
 
   if (!post) {
-    return <div className="container mx-auto p-4">Post não encontrado.</div>;
+    return <div className={`container mx-auto p-4 ${isDark ? "bg-[#333333] text-white" : "bg-white text-black"}`}>Post não encontrado.</div>;
   }
 
   return (
-    <div className="container mx-auto p-4 w-[1200px]">
-
-      <div className='flex items-center gap-4 mt-8'>
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {post.tags.map((tag, index) => (
-            <span
-              key={index}
-              className="bg-[#F0EDE7] border border-[#F0EDE7] text-[#298382] text-xs font-semibold px-2 py-1 rounded-[10px]"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        {/* Date */}
-        <p className="text-[#4A4E58] mb-4 text-sm">
-          {new Date(post.date).toLocaleDateString('pt-BR', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-          })}
-        </p>
-      </div>
-
-      {/* Título e Summary */}
-      <h1 className="text-3xl font-bold mb-2 text-[#000000]">{post.title}</h1>
-      <h3 className="text-xl mb-2 text-[#000000]">{post.summary}</h3>
-
-      {/* Author and Image */}
-      <div className="border-b border-[#00787E] mt-6 pb-4 flex items-center gap-4">
-        <img className='w-[50px] h-[50px] rounded-[50%]' src="https://a.storyblok.com/f/178900/871x707/14240ab4f1/jose-sassi-avatar.jpg/m/filters:quality(95)format(webp)" alt="" />
-        <p className="text-sm">
-          <span className="font-medium text-[#00787E]">{post.author}</span>
-          {/* <span className="text-gray-600"> Categoria:</span> <span className="font-medium">{post.category}</span> */}
-        </p>
-      </div>
-
-      {/* Conteúdo */}
-      <div className="prose max-w-none mb-8 text-[#000000] border-b border-[#00787E]">
-        <p>{post.content}</p>
-
-         {/* Tags */}
-         <div className="flex flex-wrap gap-2 mb-4 mt-[60px]">
-          {post.tags.map((tag, index) => (
-            <span
-              key={index}
-              className="bg-[#F0EDE7] border border-[#F0EDE7] text-[#298382] text-xs font-semibold px-2 py-1 rounded-[10px]"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>      
-      
-      {/* Imagens */}
-      {post.images && post.images.length > 0 && (
-        <div className="space-y-4 mb-8">
-          {post.images.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`${post.title} - Imagem ${index + 1}`}
-              className="w-full h-auto rounded-lg shadow"
-            />
-          ))}
-        </div>
-      )}
-      
-      {/* Vídeos */}
-      {post.videos && post.videos.length > 0 && (
-        <div className="space-y-6 mb-8">
-          {post.videos.map((video, index) => (
-            <div key={index} className="aspect-video">
-              <iframe
-                src={video}
-                title={`${post.title} - Vídeo ${index + 1}`}
-                className="w-full h-full rounded-lg shadow"
-                allowFullScreen
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              ></iframe>
+    <div className={`container mx-auto p-4 w-[1200px] ${isDark ? "bg-[#000000] text-white" : "bg-white text-black"}`}>
+      <div className="flex flex-col md:flex-row gap-8">
+        {/* Coluna Principal com o Conteúdo do Post */}
+        <div className="md:w-3/4">
+          <div className='flex items-center gap-4 mt-8'>
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 mb-4">
+              {post.tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className={`border ${isDark ? "border-[#4A4E58] text-[#A4A5A7]" : "border-[#F0EDE7] text-[#298382]"} text-xs font-semibold px-2 py-1 rounded-[10px]`}
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
-          ))}
+
+            {/* Date */}
+            <p className={`mb-4 text-sm ${isDark ? "text-[#A4A5A7]" : "text-[#4A4E58]"}`}>
+              {new Date(post.date).toLocaleDateString('pt-BR', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+              })}
+            </p>
+          </div>
+
+          {/* Título e Summary */}
+          <h1 className={`text-3xl font-bold mb-2 ${isDark ? "text-white" : "text-[#000000]"}`}>{post.title}</h1>
+          <h3 className={`text-xl mb-2 ${isDark ? "text-white" : "text-[#000000]"}`}>{post.summary}</h3>
+
+          {/* Author and Image */}
+          <div className={`border-b ${isDark ? "border-[#4A4E58]" : "border-[#00787E]"} mt-6 pb-4 flex items-center gap-4`}>
+            <img className='w-[50px] h-[50px] rounded-[50%]' src="https://a.storyblok.com/f/178900/871x707/14240ab4f1/jose-sassi-avatar.jpg/m/filters:quality(95)format(webp)" alt="" />
+            <p className="text-sm">
+              <span className={`font-medium ${isDark ? "text-[#A4A5A7]" : "text-[#00787E]"}`}>{post.author}</span>
+            </p>
+          </div>
+
+          {/* Conteúdo */}
+          <div className={`prose max-w-none mb-8 ${isDark ? "text-white" : "text-[#000000]"} border-b ${isDark ? "border-[#4A4E58]" : "border-[#00787E]"}`}>
+            <p>{post.content}</p>
+
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 mb-4 mt-[60px]">
+              {post.tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className={`border ${isDark ? "border-[#4A4E58] text-[#A4A5A7]" : "border-[#F0EDE7] text-[#298382]"} text-xs font-semibold px-2 py-1 rounded-[10px]`}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>      
+          
+          {/* Imagens */}
+          {post.images && post.images.length > 0 && (
+            <div className="space-y-4 mb-8">
+              {post.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`${post.title} - Imagem ${index + 1}`}
+                  className="w-full h-auto rounded-lg shadow"
+                />
+              ))}
+            </div>
+          )}
+          
+          {/* Vídeos */}
+          {post.videos && post.videos.length > 0 && (
+            <div className="space-y-6 mb-8">
+              {post.videos.map((video, index) => (
+                <div key={index} className="aspect-video">
+                  <iframe
+                    src={video}
+                    title={`${post.title} - Vídeo ${index + 1}`}
+                    className="w-full h-full rounded-lg shadow"
+                    allowFullScreen
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  ></iframe>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      )}
-           
+        
+        {/* Coluna de Recomendações */}
+        <div className="md:w-2/5">
+          <div className={`sticky top-4 ${isDark ? "bg-[#000000] border-[#4A4E58]" : "bg-white border-[#000]"} border-l p-2`}>
+            <h3 className={`text-xl font-bold mb-4 ${isDark ? "text-white" : "text-[#298382]"} border-b-2 pb-2 border-[#F47521]`}>
+              Leia também
+            </h3>
+            
+            {recommendedPosts.length > 0 ? (
+              <div>
+                {recommendedPosts.map((recPost) => (
+                  <PostCardRows key={recPost.id} post={recPost} />
+                ))}
+              </div>
+            ) : (
+              <p className={`${isDark ? "text-[#A4A5A7]" : "text-gray-600"}`}>Nenhuma recomendação disponível.</p>
+            )}
+            
+            {/* Ver mais link */}
+            <div className="mt-4 text-center">
+              <Link 
+                href={`/news/${post.category.toLowerCase()}`}
+                className={`inline-block px-4 py-2 ${isDark ? "bg-[#4A4E58] text-[#A4A5A7]" : "bg-[#F0EDE7] text-[#298382]"} font-medium rounded-lg hover:bg-[#29B9B7] hover:text-white transition-colors`}
+              >
+                Ver mais {post.category}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

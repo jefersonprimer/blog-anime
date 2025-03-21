@@ -4,6 +4,9 @@ import "./globals.css";
 import Footer from "./components/layout/footer";
 import MainHeader from "./components/layout/MainHeader";
 import Header from "./components/layout/header";
+import { ThemeProvider } from "./context/ThemeContext";
+import AppWrapper from "./context/AppWrapper"; // <- Importamos o componente separado
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -21,24 +24,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-   
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-      <MainHeader/>
-      
-      <Header />
-        {children}
-      <footer>
-        <Footer />
-      </footer>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ThemeProvider>
+          <AppWrapper>
+            <MainHeader />
+            <Header />
+            {children}
+            <footer>
+              <Footer />
+            </footer>
+          </AppWrapper>
+        </ThemeProvider>
       </body>
-   
     </html>
   );
 }

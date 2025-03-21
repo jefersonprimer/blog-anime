@@ -10,7 +10,7 @@ interface BannerProps {
 
 const Banner: React.FC<BannerProps> = ({ src, alt, width, height }) => {
   return (
-    <div className="w-full h-auto my-2">
+    <div className="w-full h-auto my-2 cursor-pointer">
       <Image
         src={src}
         alt={alt}

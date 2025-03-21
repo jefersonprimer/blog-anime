@@ -57,11 +57,11 @@ const EditorsChoiceCarousel: React.FC<EditorsChoiceCarouselProps> = ({ animeList
 
   return (
     <div 
-      className="w-full bg-cover" 
+      className="w[100%] bg-cover" 
       style={{ backgroundImage: "url('https://a.storyblok.com/f/178900/1440x423/f5a26f0a1a/editor-s-picks-circles.png/m/filters:quality(95)format(webp)')" }}
     >
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col md:flex-row justify-between items-start gap-6">
+      <div className="container mx-auto px-4 py-8 text-[#FFFFFF]">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-6 w-[1000px]">
           <div className="w-full md:w-3/4">
             <div className="flex items-center mb-2">
               <h2 className="text-2xl font-bold text-white">Escolhas do editor</h2>
@@ -118,7 +118,7 @@ const EditorsChoiceCarousel: React.FC<EditorsChoiceCarouselProps> = ({ animeList
             </div>
           </div>
           
-          <div className="hidden md:block md:w-1/4">
+          <div className="hidden md:block md:w-1/4 w-[600px]">
             <div className="relative w-full h-64">
               <Image 
                 src="https://a.storyblok.com/f/178900/495x576/2f6ebc9944/news-hime-cob-3.png/m/filters:quality(95)format(webp)" 
@@ -189,7 +189,7 @@ export default function EditorsChoicePage() {
   ];
 
   return (
-    <div className="h-[460px] bg-gray-900">
+    <div className="flex justify-center items-center w-[100%] h-[460px] bg-gray-900">
       <main>
         <EditorsChoiceCarousel animeList={animeList} />
       </main>

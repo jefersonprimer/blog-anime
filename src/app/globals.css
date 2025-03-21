@@ -32,3 +32,12 @@ body {
   border-image-slice: 1;
 }
 
+/* globals.css */
+.light-gradient {
+  background: linear-gradient(to right, #FFFCF6, #DDDDDC, #D7D7D7);
+}
+
+.dark-gradient {
+  background: linear-gradient(to right, #1F2937, #111827, #000000);
+}
+

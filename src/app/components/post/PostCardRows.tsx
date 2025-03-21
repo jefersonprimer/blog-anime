@@ -1,5 +1,6 @@
 "use client";
 
+import { useTheme } from "@/app/context/ThemeContext"; // Importando o hook useTheme
 import { Post } from "@/types/posts";
 import Link from "next/link";
 
@@ -24,8 +25,10 @@ const getPostUrl = (post: Post) => {
 };
 
 const PostCardRows: React.FC<PostCardRowsProps> = ({ post }) => {
+  const { isDark } = useTheme(); // Pegando o estado do tema
+
   return (
-    <div className="border-b border-[#29B9B7] px-3 py-4">
+    <div className={`border-b ${isDark ? "border-[#F47521]" : "border-[#29B9B7]"} px-3 py-4`}>
       <Link href={getPostUrl(post)} className="block">
         <div className="flex items-center gap-4">
           {/* Imagem à esquerda */}
@@ -41,17 +44,23 @@ const PostCardRows: React.FC<PostCardRowsProps> = ({ post }) => {
               {post.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className="bg-[#F0EDE7] hover:bg-white border border-[#F0EDE7] text-[#298382] text-xs font-semibold px-2 py-1 my-1 rounded-[10px]"
+                  className={`${
+                    isDark ? "bg-[#000000] text-[#2ABDBB]" : "bg-[#FFFFFF] text-[#298382]"
+                  } hover:bg-white border text-xs font-semibold px-2 py-1 my-1 rounded-[10px]`}
                 >
                   {tag}
                 </span>
               ))}
             </div>
-            <p className="text-sm text-gray-500 mt-1">{formatDate(post.date)}</p>
-            <h2 className="text-lg text-[#000] font-bold mt-1 hover:text-[#00787E] transition-colors">
+            <p className={`text-sm ${isDark ? "text-gray-400" : "text-gray-500"} mt-1`}>
+              {formatDate(post.date)}
+            </p>
+            <h2 className={`text-lg ${isDark ? "text-white" : "text-[#000]"} font-bold mt-1 hover:text-[#00787E] transition-colors`}>
               {post.title}
             </h2>
-            <p className="text-base text-[#00787E] mt-1">{post.author}</p>
+            <p className={`text-base ${isDark ? "text-[#00787E]" : "text-[#00787E]"} mt-1`}>
+              {post.author}
+            </p>
           </div>
         </div>
       </Link>

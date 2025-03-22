@@ -7,12 +7,12 @@ const Footer = () => {
   const { isDark } = useTheme(); // Pegando o estado do tema
 
   return (
-    <footer className={`w-full  mx-auto px-4 ${isDark ? "bg-gradient-to-b from-black to-[#1C3039]" : "bg-[#FFFCF6]"}`}>
-      <div className="container max-w-[1200px] mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer className={`w-full ${isDark ? "bg-gradient-to-b from-black to-[#1C3039]" : "bg-[#FFFCF6]"}`}>
+      <div className="max-w-[1200px] mx-auto px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-8">
           {/* Navegação */}
           <div>
-          <h4 className={`text-lg font-semibold mb-4 ${isDark ? "text-white" : "text-[#000028]"} ${isDark ? "" : "border-t-2 border-[#DADADA]"}`}>Navegação</h4>
+            <h4 className={`text-lg font-semibold mb-4 ${isDark ? "text-white" : "text-[#000028]"} ${isDark ? "" : "border-t-2 border-[#DADADA]"}`}>Navegação</h4>
             <ul className={`space-y-2 ${isDark ? "text-[#A0A0A0]" : "text-[#4A4E58]"}`}>
               <li><a href="https://www.crunchyroll.com/pt-br/videos/popular" className={`${isDark ? "hover:text-[#FFFFFF] border-[#000000]" : "hover:text-[#000000] border-[#FFFFFF]"} hover:underline`}>Séries Populares</a></li>
               <li><a href="https://www.crunchyroll.com/pt-br/simulcasts" className={`${isDark ? "hover:text-[#FFFFFF] border-[#000000]" : "hover:text-[#000000] border-[#FFFFFF]"} hover:underline`}>Séries em Simulcast</a></li>
@@ -25,7 +25,7 @@ const Footer = () => {
 
           {/* Contate-nos */}
           <div>
-          <h4 className={`text-lg font-semibold mb-4 ${isDark ? "text-white" : "text-[#000028]"} ${isDark ? "" : "border-t-2 border-[#DADADA]"}`}>Contate-nos</h4>
+            <h4 className={`text-lg font-semibold mb-4 ${isDark ? "text-white" : "text-[#000028]"} ${isDark ? "" : "border-t-2 border-[#DADADA]"}`}>Contate-nos</h4>
             <ul className={`space-y-2 ${isDark ? "text-[#A0A0A0]" : "text-[#4A4E58]"}`}>
               <li>
                 <a href="https://www.youtube.com/c/CrunchyrollBR" target="_blank" className="flex items-center ">
@@ -79,7 +79,7 @@ const Footer = () => {
 
           {/* Crunchyroll */}
           <div>
-          <h4 className={`text-lg font-semibold mb-4 ${isDark ? "text-white" : "text-[#000028]"} ${isDark ? "" : "border-t-2 border-[#DADADA]"}`}>Crunchyroll</h4>
+            <h4 className={`text-lg font-semibold mb-4 ${isDark ? "text-white" : "text-[#000028]"} ${isDark ? "" : "border-t-2 border-[#DADADA]"}`}>Crunchyroll</h4>
             <ul className={`space-y-2 ${isDark ? "text-[#A0A0A0]" : "text-[#4A4E58]"}`}>
               <li>
                 <a href="https://www.crunchyroll.com/pt-br/premium?referrer=newweb_organic_footer_news&return_url=https%3A%2F%2Fwww.crunchyroll.com%2Fpt-br%2Fnews%3Fsrsltid%3DAfmBOoqMk22pd8F4V5UHEkB9feOxBsrINMqZK6wMDqHw4VwDFIKdYqaj#plans" className="flex items-center text-[#FAB818] hover:text-orange-400">
@@ -104,33 +104,33 @@ const Footer = () => {
 
           {/* Conta */}
           <div>
-          <h4 className={`text-lg font-semibold mb-4 ${isDark ? "text-white" : "text-[#000028]"} ${isDark ? "" : "border-t-2 border-[#DADADA]"}`}>Conta</h4>
-          <ul className={`space-y-2 ${isDark ? "text-[#A0A0A0]" : "text-[#4A4E58]"}`}>
+            <h4 className={`text-lg font-semibold mb-4 ${isDark ? "text-white" : "text-[#000028]"} ${isDark ? "" : "border-t-2 border-[#DADADA]"}`}>Conta</h4>
+            <ul className={`space-y-2 ${isDark ? "text-[#A0A0A0]" : "text-[#4A4E58]"}`}>
               <li><a href="https://sso.crunchyroll.com/authorize?client_id=opy75pstrnzw4edkr9ed&redirect_uri=https%3A%2F%2Fwww.crunchyroll.com%2Fcallback&response_type=cookie&state=%2Faccount%2Fpreferences&prompt=register" className={`${isDark ? "hover:text-[#FFFFFF] border-[#000000]" : "hover:text-[#000000] border-[#FFFFFF]"} hover:underline`}>Criar Conta</a></li>
               <li><a href="https://sso.crunchyroll.com/authorize?client_id=opy75pstrnzw4edkr9ed&redirect_uri=https%3A%2F%2Fwww.crunchyroll.com%2Fcallback&response_type=cookie&state=%2Fpt-br%2Fnews%3Fsrsltid%3DAfmBOoqMk22pd8F4V5UHEkB9feOxBsrINMqZK6wMDqHw4VwDFIKdYqaj" className={`${isDark ? "hover:text-[#FFFFFF] border-[#000000]" : "hover:text-[#000000] border-[#FFFFFF]"} hover:underline`}>Login</a></li>
             </ul>
           </div>
         </div>
-      </div>
 
-      <div className={`container mx-auto px-4 py-6 border-t ${isDark ? "border-gray-800" : "border-gray-200"} mt-8 text-[#4A4E58]`}>
-        <div className="flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
-          <div className="flex flex-col sm:flex-row items-center mb-4 sm:mb-0">
-            <img 
-              className="w-[158px] h-auto min-h-[12px] sm:h-auto mr-0 sm:mr-4 mb-2 sm:mb-0" 
-              src="https://www.crunchyroll.com/news/img/footer/sony_pictures_logo_dark.png" 
-              alt="Sony Pictures Logo"
-            />
-            <p className="text-xs sm:text-sm">© Crunchyroll, LLC</p>
-          </div>
-          <div className="relative">
-            <button className={`flex items-center text-xs sm:text-sm px-3 sm:px-4 py-1 sm:py-2 z-49 ${isDark ? "text-[#A4A5A7] hover:bg-gray-800" : "text-[#4A4E58] hover:bg-gray-200"}`}>
-              <svg className="w-3 sm:w-4 h-3 sm:h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-labelledby="dropdown-svg" role="img">
-                <title id="dropdown-svg">Menu dropdown</title>
-                <path fill="currentColor" d="M7 10h10l-5 5z"></path>
-              </svg>
-              PORTUGUÊS(BRASIL)
-            </button>
+        <div className={`border-t ${isDark ? "border-gray-800" : "border-gray-200"} mt-8 py-6 text-[#4A4E58]`}>
+          <div className="flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
+            <div className="flex flex-col sm:flex-row items-center mb-4 sm:mb-0">
+              <img 
+                className="w-[158px] h-auto min-h-[12px] sm:h-auto mr-0 sm:mr-4 mb-2 sm:mb-0" 
+                src="https://www.crunchyroll.com/news/img/footer/sony_pictures_logo_dark.png" 
+                alt="Sony Pictures Logo"
+              />
+              <p className="text-xs sm:text-sm">© Crunchyroll, LLC</p>
+            </div>
+            <div className="relative">
+              <button className={`flex items-center text-xs sm:text-sm px-3 sm:px-4 py-1 sm:py-2 z-49 ${isDark ? "text-[#A4A5A7] hover:bg-gray-800" : "text-[#4A4E58] hover:bg-gray-200"}`}>
+                <svg className="w-3 sm:w-4 h-3 sm:h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-labelledby="dropdown-svg" role="img">
+                  <title id="dropdown-svg">Menu dropdown</title>
+                  <path fill="currentColor" d="M7 10h10l-5 5z"></path>
+                </svg>
+                PORTUGUÊS(BRASIL)
+              </button>
+            </div>
           </div>
         </div>
       </div>

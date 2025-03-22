@@ -10,6 +10,7 @@ import AnimeSeriesCard from './components/AnimeSeriesCard';
 import QuizzesAndTests from './components/post/QuizzesAndTests';
 import Guides from './components/post/Guides';
 import { useTheme } from './context/ThemeContext';
+import CustomTagPanel from './components/CustomTagPanel';
 
 const HomePage = () => {
   const { isDark } = useTheme(); 
@@ -60,7 +61,7 @@ const HomePage = () => {
       </div>
       <AnimeSeriesCard />
       <QuizzesAndTests />
-      <AnimeSeriesCard />
+      <CustomTagPanel />
       <Guides />
       
       {/* Botão Voltar ao Topo (no final da página, centralizado) */}

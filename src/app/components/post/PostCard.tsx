@@ -40,8 +40,8 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
               <span
                 key={index}
                 className={`${
-                  isDark ? "bg-[#000000] text-[#2ABDBB]" : "bg-[#FFFFFF] text-[#298382]"
-                } hover:bg-white border text-xs font-semibold px-2 py-1 my-1 rounded-[10px]`}
+                  isDark ? "bg-[#2B2D32] text-[#2ABDBB] hover:bg-[#000] hover:border" : "bg-[#F0EDE7] text-[#2ABDBB] hover:bg-[#fff] hover:border"
+                }  text-xs font-semibold px-2 py-1 my-1 rounded-[10px]`}
               >
                 {tag}
               </span>

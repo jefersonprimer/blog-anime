@@ -30,9 +30,13 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider>
           <AppWrapper>
-            <MainHeader />
-            <Header />
-            {children}
+            <div className="fixed-header">
+              <MainHeader />
+            </div>
+            <div className="second-header">
+              <Header />
+            </div>
+            <main>{children}</main>
             <footer>
               <Footer />
             </footer>
@@ -42,3 +46,4 @@ export default function RootLayout({
     </html>
   );
 }
+

@@ -105,32 +105,34 @@ export default function PostDetailPage() {
   }
 
   return (
-    <div className={`container mx-auto p-4 w-[1200px] ${isDark ? "bg-[#000000] text-white" : "bg-white text-black"}`}>
-      <div className="flex flex-col md:flex-row gap-8">
+    <div className={`container mx-auto p-4 max-w-[1200px] ${isDark ? "bg-[#000000] text-white" : "bg-white text-black"}`}>
+      <div className="flex flex-col lg:flex-row gap-4">
         {/* Coluna Principal com o Conteúdo do Post */}
-        <div className="md:w-3/4">
-          <div className='flex items-center gap-4 mt-8'>
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2 mb-4">
-              {post.tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className={`border ${isDark ? "border-[#4A4E58] text-[#A4A5A7]" : "border-[#F0EDE7] text-[#298382]"} text-xs font-semibold px-2 py-1 rounded-[10px]`}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {/* Date */}
-            <p className={`mb-4 text-sm ${isDark ? "text-[#A4A5A7]" : "text-[#4A4E58]"}`}>
-              {new Date(post.date).toLocaleDateString('pt-BR', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-              })}
-            </p>
+        <div className="w-full lg:w-3/4">
+        <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mt-8">
+          {/* Tags - sempre flex wrap */}
+          <div className="flex flex-wrap gap-2">
+            {post.tags.map((tag, index) => (
+              <span
+                key={index}
+                className={`${
+                  isDark ? "bg-[#2B2D32] text-[#2ABDBB] hover:bg-[#000] hover:border" : "bg-[#F0EDE7] text-[#2ABDBB] hover:bg-[#fff] hover:border"
+                }  text-xs font-semibold px-2 py-1 my-1 rounded-[10px]`}
+              >
+                {tag}
+              </span>
+            ))}
           </div>
+
+          {/* Date - abaixo em mobile, ao lado em md+ */}
+          <p className={`text-sm ${isDark ? "text-[#A4A5A7]" : "text-[#4A4E58]"}`}>
+            {new Date(post.date).toLocaleDateString('pt-BR', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric'
+            })}
+          </p>
+        </div>
 
           {/* Título e Summary */}
           <h1 className={`text-3xl font-bold mb-2 ${isDark ? "text-white" : "text-[#000000]"}`}>{post.title}</h1>
@@ -195,8 +197,8 @@ export default function PostDetailPage() {
         </div>
         
         {/* Coluna de Recomendações */}
-        <div className="md:w-2/5">
-          <div className={`sticky top-4 ${isDark ? "bg-[#000000] border-[#4A4E58]" : "bg-white border-[#000]"} border-l p-2`}>
+        <div className="w-full lg:w-2/5">
+          <div className={`lg:sticky lg:top-4 ${isDark ? "bg-[#000000] border-[#4A4E58]" : "bg-white border-[#000]"} lg:border-l p-2`}>
             <h3 className={`text-xl font-bold mb-4 ${isDark ? "text-white" : "text-[#298382]"} border-b-2 pb-2 border-[#F47521]`}>
               Leia também
             </h3>

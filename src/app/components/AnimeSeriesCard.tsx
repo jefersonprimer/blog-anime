@@ -57,12 +57,14 @@ const EditorsChoiceCarousel: React.FC<EditorsChoiceCarouselProps> = ({ animeList
 
   return (
     <div 
-      className="w[100%] bg-cover" 
+      className="w-full bg-cover bg-[#007877]" 
       style={{ backgroundImage: "url('https://a.storyblok.com/f/178900/1440x423/f5a26f0a1a/editor-s-picks-circles.png/m/filters:quality(95)format(webp)')" }}
     >
-      <div className="container mx-auto px-4 py-8 text-[#FFFFFF]">
-        <div className="flex flex-col md:flex-row justify-between items-start gap-6 w-[1000px]">
-          <div className="w-full md:w-3/4">
+      <div className="container mx-auto px-4 py-8 text-[#FFFFFF] flex justify-center items-center w-[1520px] h-[420px]">
+        {/* Div pai que envolve o container dos cards e a imagem */}
+        <div className="flex flex-col md:flex-row justify-between items-start gap-6 w-[1152px] h-[374px] relative">
+          {/* Container dos cards */}
+          <div className="w-[806px] h-[374px] md:w-3/4">
             <div className="flex items-center mb-2">
               <h2 className="text-2xl font-bold text-white">Escolhas do editor</h2>
               <div className="ml-2">
@@ -81,7 +83,7 @@ const EditorsChoiceCarousel: React.FC<EditorsChoiceCarouselProps> = ({ animeList
             <div className="relative">
               <button 
                 onClick={scrollLeft} 
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/30 p-2 rounded-full hover:bg-black/50"
+                className="absolute left-[-40px] top-[120px] -translate-y-1/2 z-10 p-2 cursor-pointer"
                 aria-label="previous"
               >
                 <svg width="13" height="21" viewBox="0 0 13 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +93,7 @@ const EditorsChoiceCarousel: React.FC<EditorsChoiceCarouselProps> = ({ animeList
               
               <div 
                 id="anime-carousel" 
-                className="flex overflow-x-auto gap-4 pb-4 scrollbar-hide snap-x"
+                className="flex overflow-x-auto gap-4 pb-4 scrollbar-hide snap-x max-w-[750px]"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
                 {animeList.map((anime, index) => (
@@ -108,18 +110,19 @@ const EditorsChoiceCarousel: React.FC<EditorsChoiceCarouselProps> = ({ animeList
               
               <button 
                 onClick={scrollRight} 
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/30 p-2 rounded-full hover:bg-black/50"
+                className="absolute right-20 top-[120px] -translate-y-1/2 z-10 p-2 cursor-pointer"
                 aria-label="next"
               >
-                <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="13" height="21" viewBox="0 0 13 21"  fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" clipRule="evenodd" d="M1.04481 10L-8.61508e-07 8.94573L3.91053 5L-1.71613e-07 1.05427L1.04482 5.20478e-07L6 5L1.04481 10Z" fill="#FFFFFF" />
                 </svg>
               </button>
             </div>
           </div>
           
-          <div className="hidden md:block md:w-1/4 w-[600px]">
-            <div className="relative w-full h-64">
+          {/* Imagem fora do container, mas alinhada horizontalmente */}
+          <div className="hidden md:block absolute right-[-100px] bottom-[-100px] w-[495px] h-[581px]">
+          <div className="relative w-[495px] h-[581px] translate-y-[50px]">
               <Image 
                 src="https://a.storyblok.com/f/178900/495x576/2f6ebc9944/news-hime-cob-3.png/m/filters:quality(95)format(webp)" 
                 alt="Hime" 
@@ -189,7 +192,7 @@ export default function EditorsChoicePage() {
   ];
 
   return (
-    <div className="flex justify-center items-center w-[100%] h-[460px] bg-gray-900">
+    <div className="flex justify-center items-center w-[100%] bg-gray-900">
       <main>
         <EditorsChoiceCarousel animeList={animeList} />
       </main>

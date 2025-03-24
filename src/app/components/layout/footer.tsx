@@ -103,7 +103,7 @@ const Footer = () => {
           </div>
 
           {/* Conta */}
-          <div>
+          <div className='hidden md:block'>
             <h4 className={`text-lg font-semibold mb-4 ${isDark ? "text-white" : "text-[#000028]"} ${isDark ? "" : "border-t-2 border-[#DADADA]"}`}>Conta</h4>
             <ul className={`space-y-2 ${isDark ? "text-[#A0A0A0]" : "text-[#4A4E58]"}`}>
               <li><a href="https://sso.crunchyroll.com/authorize?client_id=opy75pstrnzw4edkr9ed&redirect_uri=https%3A%2F%2Fwww.crunchyroll.com%2Fcallback&response_type=cookie&state=%2Faccount%2Fpreferences&prompt=register" className={`${isDark ? "hover:text-[#FFFFFF] border-[#000000]" : "hover:text-[#000000] border-[#FFFFFF]"} hover:underline`}>Criar Conta</a></li>
@@ -112,8 +112,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className={`border-t ${isDark ? "border-gray-800" : "border-gray-200"} mt-8 py-6 text-[#4A4E58]`}>
-          <div className="flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
+        <div className={`border-t ${isDark ? "border-[#36414B]" : "border-[#A4A5A7]"} mt-8 py-6 text-[#4A4E58]`}>
+          <div className="flex flex-row sm:flex-row justify-between items-center text-center sm:text-left">
             <div className="flex flex-col sm:flex-row items-center mb-4 sm:mb-0">
               <img 
                 className="w-[158px] h-auto min-h-[12px] sm:h-auto mr-0 sm:mr-4 mb-2 sm:mb-0" 

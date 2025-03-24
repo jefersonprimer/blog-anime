@@ -56,7 +56,7 @@ const CustomTagPanel: React.FC = () => {
   ];
 
   return (
-    <section className="mt-8 mb-8">
+    <section className="mt-4 mb-4">
       <div
         className="bg-cover bg-center py-12"
         style={{ backgroundImage: 'url("https://a.storyblok.com/f/178900/1439x469/cfbf9eb91a/custom_tag_background_circles.png/m/filters:quality(95)format(webp)")' }}

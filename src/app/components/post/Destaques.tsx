@@ -8,7 +8,7 @@ type DestaquesProps = {
 
 const Destaques: React.FC<DestaquesProps> = ({ posts }) => {
   return (
-    <div className="border-x-2 border-[#A0A0A0] px-2">
+    <div className="lg:border-x-2 border-[#A0A0A0] px-2">
       <DestaqueCarousel posts={posts} />
       <DestaquesGrid posts={posts} />
     </div>

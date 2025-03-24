@@ -50,7 +50,7 @@ const Guides = () => {
         </div>
 
         {/* Terceiro guia */}
-        <div className="sm:col-span-1 md:col-span-1 lg:col-span-4">
+        <div className="sm:col-span-1 md:col-span-1 lg:col-span-4 lg:border-x-2 border-[#A0A0A0]">
           <FilteredPostGrid posts={guias} category="guias" limit={2} />
         </div>
 

@@ -44,9 +44,9 @@ const QuizzesAndTests = () => {
       </div>
 
       {/* Grid responsivo */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 mb-8">
         {/* Destaques (Primeiro quiz) */}
-        <div className="sm:col-span-1 lg:col-span-6">
+        <div className="sm:col-span-1 lg:col-span-6 lg:border-r-2 border-[#A0A0A0]">
           <FilteredPostGridRow posts={quizzes} category="quizzes" limit={1} />
         </div>
 

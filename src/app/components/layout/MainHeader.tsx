@@ -1,23 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
 import Link from "next/link";
-import { useTheme } from "../../context/ThemeContext"; // Ajuste o caminho de importação conforme necessário
+import { useTheme } from "../../context/ThemeContext"; 
+import LoginButton from "./components/buttons/LoginButton";
 
 const MainHeader = () => {
-  const { isDark, toggleTheme } = useTheme(); // Use o contexto global
-
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
+  const { isDark, toggleTheme } = useTheme(); 
 
   return (
     <header className={`hidden md:block ${isDark ? 'dark-gradient' : 'light-gradient'}`}>
       <div className="container mx-auto">
         <div className="flex items-center justify-between 2xl:px-[174px] h-10">
-          {/* Logo */}
+          
           <div>
             <Link href="/" className={`text-sm font-bold ${isDark ? 'text-[#F47521]' : 'text-[#008382]'}`}>       
               Página principal da Crunchyroll
@@ -96,75 +90,11 @@ const MainHeader = () => {
 
 
             {/* Login button */}
-            <div className={`flex items-center px-2 ${isDark ? 'hover:bg-[#2B2D32]' : 'hover:bg-[#E6E5E3]'}`}>
-              <button className="p-2 rounded-full cursor-pointer group">
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 32 31"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`group-hover:stroke-[#2ABDBB] ${isDark ? 'stroke-white' : 'stroke-black'} transition-all duration-300`}
-                >
-                  <path
-                    d="M16.1907 14.6737C19.9366 14.6737 22.9732 11.6328 22.9732 7.88155C22.9732 4.13032 19.9366 1.08936 16.1907 1.08936C12.4448 1.08936 9.4082 4.13032 9.4082 7.88155C9.4082 11.6328 12.4448 14.6737 16.1907 14.6737Z"
-                    strokeWidth="2"
-                  ></path>
-                  <path
-                    d="M2 17.8427L16.1894 15.0577L30.3787 17.8427C30.3787 22.2477 24.0219 29.5088 16.1894 29.5088C8.35683 29.5088 2 22.2477 2 17.8427Z"
-                    strokeWidth="2"
-                  ></path>
-                </svg>
-              </button>
+            <div className={`flex items-center  ${isDark ? 'hover:bg-[#2B2D32]' : 'hover:bg-[#E6E5E3]'}`}>
+            <LoginButton isDark={isDark} />
             </div>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              type="button"
-              className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
-              onClick={toggleMobileMenu}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-          </div>
+          </div>          
         </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200 dark:border-gray-700">
-            <div className="flex flex-col space-y-2">
-              <Link
-                href="/login"
-                className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 px-4 py-2 block"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Entrar
-              </Link>
-              <Link
-                href="/signup"
-                className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 px-4 py-2 block"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Cadastrar
-              </Link>
-            </div>
-          </div>
-        )}
       </div>
     </header>
   );

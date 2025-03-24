@@ -1,187 +1,198 @@
-'use client';
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { useParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Post } from '@/types/posts';
+interface AnimeSeriesCardProps {
+  title: string;
+  imageUrl: string;
+  imageAlt: string;
+  href: string;
+}
 
-export default function PostDetailPage() {
-  const params = useParams();
-  const [post, setPost] = useState<Post | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+const AnimeSeriesCard: React.FC<AnimeSeriesCardProps> = ({ title, imageUrl, imageAlt, href }) => {
+  return (
+    <div className="flex flex-col">
+      <Link href={href} className="block">
+        <div className="relative w-full aspect-[172/262]">
+          <Image 
+            src={imageUrl} 
+            alt={imageAlt} 
+            fill 
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 172px"
+            loading="lazy"
+          />
+        </div>
+      </Link>
+      <Link href={href} className="mt-2">
+        <p className="text-sm font-medium truncate">{title}</p>
+      </Link>
+    </div>
+  );
+};
 
-  // Captura os parâmetros da URL
-  const { category, year, month, day, slug } = params;
+interface EditorsChoiceCarouselProps {
+  animeList: {
+    title: string;
+    imageUrl: string;
+    imageAlt: string;
+    href: string;
+  }[];
+}
 
-  useEffect(() => {
-    async function fetchPost() {
-      try {
-        setLoading(true);
-        console.log("Fetching with params:", { category, year, month, day, slug });
-
-        // Busca todos os posts
-        const response = await axios.get('https://blog-backend-ten-plum.vercel.app/api/posts');
-        const allPosts = response.data;
-        
-        // Busca primária: tenta encontrar por combinação exata dos parâmetros
-        let foundPost = allPosts.find((p: Post) => {
-          // Converte a string de data em componentes
-          const dateStr = p.date; // Formato "YYYY-MM-DD"
-          const [postYear, postMonth, postDay] = dateStr.split('-');
-          
-          // Comparação com todos os parâmetros
-          const categoryMatch = p.category.toLowerCase() === category?.toLowerCase();
-          const yearMatch = postYear === year;
-          const monthMatch = postMonth === month;
-          const dayMatch = postDay === day;
-          const slugMatch = p.slug === slug;
-          
-          console.log(`Post ${p.id} matches:`, {
-            categoryMatch, yearMatch, monthMatch, dayMatch, slugMatch,
-            fullMatch: categoryMatch && yearMatch && monthMatch && dayMatch && slugMatch
-          });
-          
-          return categoryMatch && yearMatch && monthMatch && dayMatch && slugMatch;
-        });
-
-        // Se não encontrou, tenta uma busca apenas pelo slug
-        if (!foundPost) {
-          console.log("First search failed, trying by slug only");
-          foundPost = allPosts.find((p: Post) => p.slug === slug);
-        }
-
-        // Se ainda não encontrou, tenta pelo ID em slugs que têm o formato "ID-resto-do-slug"
-        if (!foundPost && slug && slug.includes('-')) {
-          console.log("Second search failed, trying by ID in slug");
-          const potentialId = slug.split('-')[0];
-          if (!isNaN(Number(potentialId))) {
-            foundPost = allPosts.find((p: Post) => p.id === Number(potentialId));
-          }
-        }
-
-        if (foundPost) {
-          console.log("Found post:", foundPost);
-          setPost(foundPost);
-        } else {
-          setError('Post não encontrado com os parâmetros fornecidos.');
-        }
-      } catch (err) {
-        console.error("Erro ao buscar o post:", err);
-        setError(`Erro ao carregar o post: ${(err as Error).message}`);
-      } finally {
-        setLoading(false);
-      }
+const EditorsChoiceCarousel: React.FC<EditorsChoiceCarouselProps> = ({ animeList }) => {
+  const scrollLeft = () => {
+    const container = document.getElementById('anime-carousel');
+    if (container) {
+      container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
     }
+  };
 
-    if (slug) {
-      fetchPost();
-    } else {
-      setError('Slug não fornecido na URL.');
-      setLoading(false);
+  const scrollRight = () => {
+    const container = document.getElementById('anime-carousel');
+    if (container) {
+      container.scrollBy({ left: container.clientWidth, behavior: 'smooth' });
     }
-  }, [category, year, month, day, slug]);
-
-  if (loading) {
-    return <div className="container mx-auto p-4">Carregando...</div>;
-  }
-
-  if (error) {
-    return <div className="container mx-auto p-4 text-red-500">{error}</div>;
-  }
-
-  if (!post) {
-    return <div className="container mx-auto p-4">Post não encontrado.</div>;
-  }
+  };
 
   return (
-    <div className="container mx-auto p-4 w-[1200px]">
-
-      <div className='flex items-center gap-4 mt-8'>
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {post.tags.map((tag, index) => (
-            <span
-              key={index}
-              className="bg-[#F0EDE7] border border-[#F0EDE7] text-[#298382] text-xs font-semibold px-2 py-1 rounded-[10px]"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        {/* Date */}
-        <p className="text-[#4A4E58] mb-4 text-sm">
-          {new Date(post.date).toLocaleDateString('pt-BR', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-          })}
-        </p>
-      </div>
-
-      {/* Título e Summary */}
-      <h1 className="text-3xl font-bold mb-2 text-[#000000]">{post.title}</h1>
-      <h3 className="text-xl mb-2 text-[#000000]">{post.summary}</h3>
-
-      {/* Author and Image */}
-      <div className="border-b border-[#00787E] mt-6 pb-4 flex items-center gap-4">
-        <img className='w-[50px] h-[50px] rounded-[50%]' src="https://a.storyblok.com/f/178900/871x707/14240ab4f1/jose-sassi-avatar.jpg/m/filters:quality(95)format(webp)" alt="" />
-        <p className="text-sm">
-          <span className="font-medium text-[#00787E]">{post.author}</span>
-          {/* <span className="text-gray-600"> Categoria:</span> <span className="font-medium">{post.category}</span> */}
-        </p>
-      </div>
-
-      {/* Conteúdo */}
-      <div className="prose max-w-none mb-8 text-[#000000] border-b border-[#00787E]">
-        <p>{post.content}</p>
-
-         {/* Tags */}
-         <div className="flex flex-wrap gap-2 mb-4 mt-[60px]">
-          {post.tags.map((tag, index) => (
-            <span
-              key={index}
-              className="bg-[#F0EDE7] border border-[#F0EDE7] text-[#298382] text-xs font-semibold px-2 py-1 rounded-[10px]"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>      
-      
-      {/* Imagens */}
-      {post.images && post.images.length > 0 && (
-        <div className="space-y-4 mb-8">
-          {post.images.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`${post.title} - Imagem ${index + 1}`}
-              className="w-full h-auto rounded-lg shadow"
-            />
-          ))}
-        </div>
-      )}
-      
-      {/* Vídeos */}
-      {post.videos && post.videos.length > 0 && (
-        <div className="space-y-6 mb-8">
-          {post.videos.map((video, index) => (
-            <div key={index} className="aspect-video">
-              <iframe
-                src={video}
-                title={`${post.title} - Vídeo ${index + 1}`}
-                className="w-full h-full rounded-lg shadow"
-                allowFullScreen
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              ></iframe>
+    <div 
+      className="w-full bg-cover" 
+      style={{ backgroundImage: "url('https://a.storyblok.com/f/178900/1440x423/f5a26f0a1a/editor-s-picks-circles.png/m/filters:quality(95)format(webp)')" }}
+    >
+      <div className="container mx-auto px-4 py-8 text-[#FFFFFF]">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-6 w-[1000px]">
+          <div className="w-full md:w-3/4">
+            <div className="flex items-center mb-2">
+              <h2 className="text-2xl font-bold text-white">Escolhas do editor</h2>
+              <div className="ml-2">
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M13.2734 1.11482C11.59 2.01317 10.3942 3.6543 9.93073 5.62114C8.0957 4.8809 6.1188 4.93282 4.46774 5.8139C1.03612 7.64516 -0.148498 12.385 1.82302 16.3958C3.70154 20.2175 7.3 22.8825 12.2244 24.1713C15.8655 25.094 18.9025 24.954 19.0182 24.94L19.384 24.9359L19.6009 24.6291C19.6794 24.5394 21.5956 22.0362 22.9725 18.4356C24.8466 13.5189 24.874 8.91898 22.9955 5.09732C21.0887 1.05191 16.705 -0.716438 13.2734 1.11482Z" fill="#FF944D" />
+                </svg>
+              </div>
+              <div className="ml-1">
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M12.0064 1.11482C13.6898 2.01317 14.8855 3.6543 15.3491 5.62114C17.1841 4.8809 19.161 4.93282 20.812 5.8139C24.2437 7.64516 25.4283 12.385 23.4568 16.3958C21.5782 20.2175 17.9798 22.8825 13.0554 24.1713C9.4143 25.094 6.37731 24.954 6.26159 24.94L5.89583 24.9359L5.67886 24.6291C5.60034 24.5394 3.68414 22.0362 2.3073 18.4356C0.433191 13.5189 0.405784 8.91898 2.2843 5.09732C4.19107 1.05191 8.57475 -0.716438 12.0064 1.11482Z" fill="#51D6D5" />
+                </svg>
+              </div>
             </div>
-          ))}
+            <p className="text-white mb-6">Confira o que a equipe da Crunchyroll Notícias está assistindo na Crunchyroll!</p>
+            
+            <div className="relative">
+              <button 
+                onClick={scrollLeft} 
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/30 p-2 rounded-full hover:bg-black/50"
+                aria-label="previous"
+              >
+                <svg width="13" height="21" viewBox="0 0 13 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M10.0607 0L12.182 2.12132L4.24232 10.0607L12.182 18L10.0607 20.1213L0 10.0607L10.0607 0Z" fill="white" />
+                </svg>
+              </button>
+              
+              <div 
+                id="anime-carousel" 
+                className="flex overflow-x-auto gap-4 pb-4 scrollbar-hide snap-x"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                {animeList.map((anime, index) => (
+                  <div key={index} className="flex-shrink-0 w-[172px] snap-start">
+                    <AnimeSeriesCard 
+                      title={anime.title}
+                      imageUrl={anime.imageUrl}
+                      imageAlt={anime.imageAlt}
+                      href={anime.href}
+                    />
+                  </div>
+                ))}
+              </div>
+              
+              <button 
+                onClick={scrollRight} 
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/30 p-2 rounded-full hover:bg-black/50"
+                aria-label="next"
+              >
+                <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M1.04481 10L-8.61508e-07 8.94573L3.91053 5L-1.71613e-07 1.05427L1.04482 5.20478e-07L6 5L1.04481 10Z" fill="#FFFFFF" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          <div className="hidden md:block md:w-1/4 w-[600px]">
+            <div className="relative w-full h-64">
+              <Image 
+                src="https://a.storyblok.com/f/178900/495x576/2f6ebc9944/news-hime-cob-3.png/m/filters:quality(95)format(webp)" 
+                alt="Hime" 
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, 495px"
+                loading="lazy"
+              />
+            </div>
+          </div>
         </div>
-      )}
-           
+      </div>
+    </div>
+  );
+};
+
+export default function EditorsChoicePage() {
+  const animeList = [
+    {
+      title: "Solo Leveling",
+      imageUrl: "https://a.storyblok.com/f/178900/1067x1601/0090e9bf15/solo-leveling-season-2-key-visual.png/m/172x262/filters:quality(95)format(webp)",
+      imageAlt: "Solo Leveling Season 2 Key Visual",
+      href: "https://www.crunchyroll.com/series/GDKHZEJ0K/solo-leveling"
+    },
+    {
+      title: "Re:ZERO -Starting Life in Another World-",
+      imageUrl: "https://a.storyblok.com/f/178900/849x1200/8682dbbe63/rezero-s3-counterattack-arc-kv.jpg/m/172x262/filters:quality(95)format(webp)",
+      imageAlt: "Re:ZERO -Starting Life in Another World- Season 3 Counterattack Story Arc Key Visual",
+      href: "https://www.crunchyroll.com/series/GRGG9798R/rezero--starting-life-in-another-world-"
+    },
+    {
+      title: "ZENSHU",
+      imageUrl: "https://a.storyblok.com/f/178900/1064x1596/ccff6ac8ca/zenshu-key-art-2.png/m/172x262/filters:quality(95)format(webp)",
+      imageAlt: "Zenshu Key Art 2",
+      href: "https://www.crunchyroll.com/series/G24H1NW8E/zenshu"
+    },
+    {
+      title: "Dr. STONE",
+      imageUrl: "https://a.storyblok.com/f/178900/960x1357/d42021c586/dr-stone-science-future-kv.jpeg/m/172x262/filters:quality(95)format(webp)",
+      imageAlt: "Dr. STONE SCIENCE FUTURE",
+      href: "https://www.crunchyroll.com/series/GYEXQKJG6/dr-stone"
+    },
+    {
+      title: "Shangri-La Frontier",
+      imageUrl: "https://a.storyblok.com/f/178900/1061x1500/67820aea3e/shangri-la-frontier-season-2-arc-visual.jpg/m/172x262/filters:quality(95)format(webp)",
+      imageAlt: "Shangri-La Frontier Season 2 anime cour 2 key visual",
+      href: "https://www.crunchyroll.com/series/G79H23Z8P/shangri-la-frontier"
+    },
+    {
+      title: "The Apothecary Diaries",
+      imageUrl: "https://a.storyblok.com/f/178900/240x360/254ce5bb24/the-apothecary-diaries-s2-240.png/m/172x262/filters:quality(95)format(webp)",
+      imageAlt: "The Apothecary Diaries S2 240",
+      href: "https://www.crunchyroll.com/series/G3KHEVDJ7/the-apothecary-diaries"
+    },
+    {
+      title: "Honey Lemon Soda",
+      imageUrl: "https://a.storyblok.com/f/178900/720x1080/3f3ba30f71/honey-lemon-soda-kv-tall.jpg/m/172x262/filters:quality(95)format(webp)",
+      imageAlt: "Honey Lemon Soda Tall Key Visual",
+      href: "https://www.crunchyroll.com/series/GMEHME77W/honey-lemon-soda"
+    },
+    {
+      title: "The 100 Girlfriends",
+      imageUrl: "https://a.storyblok.com/f/178900/1000x1413/e999e88ccf/the-100-girlfriends-who-really-really-really-really-really-love-you-season-2-key-visual.jpg/m/172x262/filters:quality(95)format(webp)",
+      imageAlt: "The 100 Girlfriends Who Really, Really, Really, Really, REALLY Love You anime key visual",
+      href: "https://www.crunchyroll.com/series/GNVHKN933/the-100-girlfriends-who-really-really-really-really-really-love-you"
+    }
+  ];
+
+  return (
+    <div className="flex justify-center items-center w-[100%] h-[460px] bg-gray-900">
+      <main>
+        <EditorsChoiceCarousel animeList={animeList} />
+      </main>
     </div>
   );
 }

@@ -40,7 +40,7 @@ const AdBanner = () => {
         </div>
 
         {/* Grid de anúncios (Próximos 2 anúncios) */}
-        <div className="sm:col-span-1 lg:col-span-3">
+        <div className="sm:col-span-1 lg:col-span-3 lg:border-x-2 border-[#A0A0A0]"> 
           <FilteredPostGrid posts={anuncios} category="anuncios" limit={1} />
         </div>
 
